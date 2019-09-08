@@ -1,0 +1,26 @@
+<apex:page standardController="employeeAttendance__c" showHeader="false" sidebar="false" standardStylesheets="true" extensions="employeeAttendance_class">
+    <style></style>
+
+    <div>
+        <apex:form >
+            <apex:pageBlock>
+                <!-- Brand Logo -->
+                <apex:facet name="header">
+                        <img src="https://www.rudhrainfosolutions.com/wp-content/uploads/2018/09/ris-logo.png" width="10%" />
+                    </apex:facet>
+
+                <!--Input Fields -->
+                <apex:pageBlockSection columns="3">    
+                    <apex:Pagemessages />
+                    
+                    <apex:panelGrid columns="3">
+                        <apex:inputField value="{!employeeAttendance__c.Employee_Name__c}"/>
+                        <apex:commandButton value="CHECK IN" action="{!save}" />
+                        <apex:commandButton value="CHECK OUT" action="{!chckOutBtn}" />
+                    </apex:panelGrid>
+                </apex:pageBlockSection>   
+
+            </apex:pageBlock>
+        </apex:form>
+    </div>
+</apex:page>
