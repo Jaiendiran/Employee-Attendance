@@ -22,7 +22,7 @@ public with sharing class employeeAttendance_class {
         for(employeeAttendance__c emp: ls_empAttd){
             ls_empAtt = new List<employeeAttendance__c>();
 
-            if(emp.Check_In_Date_Time__c != null){
+            if(emp.Check_Out_Date_Time__c == null){
                 emp.Check_Out_Date_Time__c = System.now();
 
                 ls_empAtt.add(emp);
