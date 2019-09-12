@@ -11,10 +11,28 @@
                     Reason:<br />
                     {!relatedTo.Description__c}
                 </p>
+                <p>
+                    Approval Status:<br />
+                    {!relatedTo.Approval_Status__c}
+                </p>
 
-                <table>
-                    <tr> <c:email_component /> </tr>
+                <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>             
+                                <button id="apprFunc">Approve</button>
+                            </td>
+                            <td>
+                                <input type="text" id="ip" />
+                            </td>
+                        </tr>
                 </table>
+
+                <script>
+                   document.getElementById('apprFunc').addEventListener('Click', func(event)){
+                       document.getElementById('ip').innerHTML += 'Rejected';
+                       //event.preventDefault();
+                   }
+                </script>
             </body>
         </html>
     </messaging:htmlEmailBody>
