@@ -1,6 +1,21 @@
-<messaging:emailTemplate subject="Test VF" recipientType="User" relatedToType="employee__c">
-<messaging:plainTextEmailBody >
-Congratulations!
-This is your new Visualforce Email Template.
-</messaging:plainTextEmailBody>
+<messaging:emailTemplate subject="Approval Email From {!relatedTo.name}" recipientType="User" relatedToType="employee__c">
+    <messaging:htmlEmailBody >
+        <html>
+            <head></head>
+            <body>
+                <p> Dear {!recipient.name},</p>
+                <p>
+                    {!relatedTo.name} has a request !
+                </p>
+                <p>
+                    Reason:<br />
+                    {!relatedTo.Description__c}
+                </p>
+
+                <table>
+                    <tr> <c:email_component /> </tr>
+                </table>
+            </body>
+        </html>
+    </messaging:htmlEmailBody>
 </messaging:emailTemplate>
