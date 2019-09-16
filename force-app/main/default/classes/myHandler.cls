@@ -5,17 +5,16 @@ global class myHandler implements Messaging.InboundEmailHandler {
     Messaging.InboundEmailResult result = new Messaging.InboundEmailResult();
    
    	//Variable Declaration
-	String[] recordID = email.plainTextBody.split('\n', 0); 
-	string sub = email.subject;
-	Date dt = Date.today();
+	String status = email.plainTextBody; 
+	string usrID = email.subject;
 
 	//Collections
-	list<Employee__c> ls_emp = [select ID, name, (select id, name, CreatedDate, Description__c, Approval_status__c from employeeAttendances__r where createdDate =:dt) from Employee__c where ID =:recordID];
+	list<Employee__c> ls_emp = [select ID, Name, (select id, Name, Employee_Name__c, Description__c, Approval_Status__c from employeeAttendances__r where createdDate = Today) from employee__c where ID =: usrID];
 	list<employeeAttendance__c> ls_approved = new list<employeeAttendance__c>();
 	list<employeeAttendance__c> ls_rejected = new list<employeeAttendance__c>();
 
 	
-	if(sub == 'Approved'){
+	if(status == 'Approved'){
 		//Iterates over employee and employee attendance object to update approval status field as 'Approved'.
 		for(Employee__c emp: ls_emp){
 			for(employeeAttendance__c empAtt: emp.employeeAttendances__r){
@@ -28,7 +27,7 @@ global class myHandler implements Messaging.InboundEmailHandler {
 			}
 		} 
 		update ls_approved;
-	} else if(sub == 'Rejected'){
+	} else if(status == 'Rejected'){
 		//Iterates over employee and employee attedance object to update approval status field as 'rejected'.
 		for(Employee__c empl: ls_emp){
 			for(employeeAttendance__c empAttd: empl.employeeAttendances__r){
@@ -41,7 +40,7 @@ global class myHandler implements Messaging.InboundEmailHandler {
 			}
 		}    
 		update ls_rejected;
-	}	
+	}
 
    	return result;
   }
