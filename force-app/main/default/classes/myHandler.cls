@@ -5,7 +5,8 @@ global class myHandler implements Messaging.InboundEmailHandler {
     Messaging.InboundEmailResult result = new Messaging.InboundEmailResult();
    
    	//Variable Declaration
-	String status = email.plainTextBody; 
+	String[] emailBody = email.plainTextBody.split('\n', 0);
+	String apprStatus = emailBody[0]; 
 	string usrID = email.subject;
 
 	//Collections
@@ -14,7 +15,7 @@ global class myHandler implements Messaging.InboundEmailHandler {
 	list<employeeAttendance__c> ls_rejected = new list<employeeAttendance__c>();
 
 	
-	if(status == 'Approved'){
+	if(apprStatus == 'Approved'){
 		//Iterates over employee and employee attendance object to update approval status field as 'Approved'.
 		for(Employee__c emp: ls_emp){
 			for(employeeAttendance__c empAtt: emp.employeeAttendances__r){
@@ -27,7 +28,7 @@ global class myHandler implements Messaging.InboundEmailHandler {
 			}
 		} 
 		update ls_approved;
-	} else if(status == 'Rejected'){
+	} else if(apprStatus == 'Rejected'){
 		//Iterates over employee and employee attedance object to update approval status field as 'rejected'.
 		for(Employee__c empl: ls_emp){
 			for(employeeAttendance__c empAttd: empl.employeeAttendances__r){
