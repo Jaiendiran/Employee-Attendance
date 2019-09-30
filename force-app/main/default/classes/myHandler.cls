@@ -25,7 +25,7 @@ global class myHandler implements Messaging.InboundEmailHandler {
 						ls_approved.add(empAtt);
 					}
 				}
-			}
+			} 
 		} 
 		update ls_approved;
 	} else if(apprStatus == 'Rejected'){
